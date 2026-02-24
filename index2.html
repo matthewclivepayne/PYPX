@@ -1,1 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYPX 2026</title>
+    <!-- Onest font -->
+    <link href="https://fonts.cdnfonts.com/css/onest" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #3b82f6;
+            --color-primary-hover: #2563eb;
+            --color-bg: #020617;
+            --color-surface: #0b1220;
+            --color-text: #e5e7eb;
+            --color-text-secondary: #9ca3af;
+            --color-accent: #facc15;
+            --color-border: rgba(148, 163, 184, 0.4);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: radial-gradient(circle at top, #1d2a4d 0%, #020617 55%, #020617 100%);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 16px 40px;
+        }
+
+        header {
+            text-align: center;
+            padding: 32px 20px 28px;
+            background: linear-gradient(135deg, #111827 0%, #020617 60%, #1d4ed8 120%);
+            border-radius: 18px;
+            margin-bottom: 28px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+            letter-spacing: 0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            color: var(--color-text-secondary);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            margin: 28px 0 22px;
+            text-align: center;
+        }
+
+        #searchInput {
+            width: 100%;
+            max-width: 520px;
+            padding: 12px 18px;
+            font-size: 0.98rem;
+            border: 2px solid var(--color-border);
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.85);
+            color: var(--color-text);
+            transition: border-color 0.25s, box-shadow 0.25s, background 0.25s, transform 0.1s;
+            backdrop-filter: blur(10px);
+        }
+
+        #searchInput::placeholder {
+            color: var(--color-text-secondary);
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35);
+            background: #020617;
+            transform: translateY(-1px);
+        }
+
+        .passions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
+            margin-bottom: 40px;
+        }
+
+        .passion-card {
+            background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.22), rgba(15, 23, 42, 0.96));
+            border: 1px solid var(--color-border);
+            border-radius: 18px;
+            padding: 18px 18px 16px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.9);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .passion-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: var(--color-primary);
+            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.4);
+        }
+
+        .passion-card h3 {
+            color: var(--color-text);
+            font-size: 1.1rem;
+        }
+
+        .passion-card .icon {
+            font-size: 1.8rem;
+            margin-bottom: 4px;
+        }
+
+        .passion-card small {
+            color: var(--color-text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top, rgba(30, 64, 175, 0.5), rgba(0, 0, 0, 0.9));
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #020617;
+            border: 1px solid rgba(59, 130, 246, 0.8);
+            border-radius: 18px;
+            max-width: 760px;
+            width: 100%;
+            padding: 26px 26px 24px;
+            position: relative;
+            margin: auto;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.95);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            font-size: 1.8rem;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.2s, transform 0.1s;
+        }
+
+        .close-btn:hover {
+            color: var(--color-primary);
+            transform: scale(1.08);
+        }
+
+        .modal-content h2 {
+            color: var(--color-primary);
+            margin-bottom: 16px;
+            font-size: 1.7rem;
+        }
+
+        .modal-hint {
+            font-size: 0.82rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .modal-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-content li {
+            background: linear-gradient(135deg, #020617 0%, #020617 55%, #111827 100%);
+            padding: 13px 14px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-left: 4px solid var(--color-accent);
+            transition: all 0.2s;
+            font-size: 0.96rem;
+        }
+
+        .modal-content li:hover {
+            border-left-color: var(--color-primary);
+            transform: translateX(4px);
+            background: linear-gradient(135deg, #020617 0%, #0b1120 55%, #1d2538 100%);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 26px;
+            right: 26px;
+            background: var(--color-primary);
+            color: #e5e7eb;
+            width: 46px;
+            height: 46px;
+            border-radius: 999px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.7);
+            transition: all 0.25s;
+        }
+
+        .back-to-top:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-3px);
+        }
+
+        .back-to-top.visible {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            header {
+                padding: 24px 18px 22px;
+            }
+
+            .passions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 22px 18px 20px;
+            }
+
+            .modal-content h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Selecting a PYPX Topic</h1>
+            <p class="subtitle">This website can help you connect your passion to an issue facing today's world.</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔎 Type to search for a passion...">
+        </div>
+
+        <div class="passions-grid" id="passionsGrid"></div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeBtn" aria-label="Close">&times;</button>
+            <h2 id="modalTitle"></h2>
+            <p class="modal-hint">Use one of these to help you write an inquiry question.</p>
+            <ul id="modalList"></ul>
+        </div>
+    </div>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script>
+        const passions = [
+            {
+                name: "Trends in football",
+                icon: "⚽",
+                issues: [
+                    "How rule changes (like VAR) affect fairness and fan experience in modern football.",
+                    "Rise of superclubs and what that means for smaller teams and competitive balance.",
+                    "Football's growing digital presence (streaming, social media) and access for poorer fans.",
+                    "The impact of global football fandom on local sports and youth participation.",
+                    "How data-driven football changes scouting and opportunities for players from different regions."
+                ]
+            },
+            {
+                name: "Football transfers",
+                icon: "💰",
+                issues: [
+                    "How gigantic transfer fees affect smaller clubs and youth academies.",
+                    "Player agents, contracts, and exploitation of young players from poorer countries.",
+                    "Financial Fair Play rules and whether they actually keep the game fair.",
+                    "Human impact of constant transfers on players' families and mental health.",
+                    "Transfer rumours, online harassment, and how fans treat players as assets not people."
+                ]
+            },
+            {
+                name: "The Smiths and The Cure influence on modern music",
+                icon: "🎸",
+                issues: [
+                    "How alternative bands influence mental health conversations through lyrics and fan communities.",
+                    "Music streaming and whether older bands are paid fairly for their influence.",
+                    "Cultural appropriation vs inspiration: how today's artists use 80s aesthetics and sounds.",
+                    "Representation of sadness and depression in music and its impact on teen listeners.",
+                    "Gatekeeping in alternative music communities and who gets to be considered authentic."
+                ]
+            },
+            {
+                name: "Ongoing conflict around the world",
+                icon: "🌍",
+                issues: [
+                    "How wars affect children's education and everyday life.",
+                    "Role of social media in spreading information and misinformation about conflicts.",
+                    "Refugees: challenges when starting a new life in another country.",
+                    "How conflict damages the environment and infrastructure (water, energy, housing).",
+                    "Peace-building: how youth groups and NGOs try to reduce violence and build understanding."
+                ]
+            },
+            {
+                name: "Pathways to elite football in South East Asia",
+                icon: "🏆",
+                issues: [
+                    "Access to quality coaching and facilities in cities vs rural areas.",
+                    "Cost of training academies and who gets left out.",
+                    "Education vs sport: what happens to players who don't make it.",
+                    "Scouting: how fair are talent identification systems for poorer communities.",
+                    "Gender inequality in pathways for girls and women's football in the region."
+                ]
+            },
+            {
+                name: "Cricket",
+                icon: "🏏",
+                issues: [
+                    "Environmental impact of international cricket tours and fan travel (flights, stadium energy use).",
+                    "How big leagues (like T20 franchises) affect local cricket and national teams.",
+                    "Match-fixing, gambling, and corruption in cricket.",
+                    "Access to cricket for girls and children from low-income families.",
+                    "Use of technology (DRS, analytics) and fairness in umpiring decisions."
+                ]
+            },
+            {
+                name: "Drinking water",
+                icon: "💧",
+                issues: [
+                    "Access to safe drinking water in urban vs rural communities.",
+                    "Plastic bottle waste and pollution from bottled water.",
+                    "Impact of climate change and drought on water security.",
+                    "How water contamination affects children's health and development.",
+                    "Community solutions: wells, filters, and education about clean water."
+                ]
+            },
+            {
+                name: "Tourism",
+                icon: "✈️",
+                issues: [
+                    "How tourism supports jobs but can also raise prices for local residents.",
+                    "Environmental damage from mass tourism (waste, carbon emissions, damage to nature).",
+                    "Cultural change when traditions become shows for visitors.",
+                    "Responsible tourism and what it looks like in practice.",
+                    "Overtourism at famous sites vs developing lesser-known destinations."
+                ]
+            },
+            {
+                name: "Technology",
+                icon: "💻",
+                issues: [
+                    "Screen time, attention, and mental health in young people.",
+                    "Digital divide: who has access to devices and fast internet, and who doesn't.",
+                    "E-waste and the environmental impact of constant device upgrades.",
+                    "Privacy, data collection, and how apps track users.",
+                    "AI tools in school: help, harm, or both for learning and cheating."
+                ]
+            },
+            {
+                name: "Family issues",
+                icon: "👨‍👩‍👧‍👦",
+                issues: [
+                    "How financial stress or job loss affects children's learning and wellbeing.",
+                    "Impact of divorce or separation on young people.",
+                    "Digital devices and conflict at home (screen time, online safety).",
+                    "Supporting family members with physical or mental health challenges.",
+                    "Migration for work and what happens to children left behind with relatives."
+                ]
+            },
+            {
+                name: "Game design",
+                icon: "🎮",
+                issues: [
+                    "Violence in games and its impact on behaviour and attitudes.",
+                    "Representation in games: gender, race, and stereotypes.",
+                    "Microtransactions, loot boxes, and fairness to young players.",
+                    "Accessibility: how game design can include players with disabilities.",
+                    "Gaming addiction vs healthy gaming habits."
+                ]
+            },
+            {
+                name: "Horror films",
+                icon: "🎬",
+                issues: [
+                    "Why people enjoy fear and what that says about human psychology.",
+                    "Censorship, age ratings, and protecting children from harmful content.",
+                    "How horror films reflect real-world fears (disease, war, climate change).",
+                    "Representation of gender and marginalised groups in horror stories.",
+                    "Violence in horror and whether it desensitises viewers."
+                ]
+            },
+            {
+                name: "Are tourists a good thing?",
+                icon: "🤔",
+                issues: [
+                    "Jobs created by tourism vs low wages and seasonal work.",
+                    "Pressure on local resources: water, electricity, and housing.",
+                    "Respectful vs disrespectful behaviour of visitors at religious or cultural sites.",
+                    "How tourism can help preserve or damage cultural heritage.",
+                    "Tourism and carbon footprints from international flights."
+                ]
+            },
+            {
+                name: "Food culture in Cambodia",
+                icon: "🍜",
+                issues: [
+                    "How global fast food chains affect traditional Cambodian food.",
+                    "Food safety, hygiene, and public health.",
+                    "Street food vendors and their role in local economies.",
+                    "Nutrition and rising rates of obesity or malnutrition.",
+                    "Protecting traditional recipes and food knowledge for future generations."
+                ]
+            },
+            {
+                name: "Travelling to new places",
+                icon: "🗺️",
+                issues: [
+                    "Carbon emissions from flights and how to travel more sustainably.",
+                    "Voluntourism: when helping actually harms local communities.",
+                    "Respecting local cultures, dress codes, and religions when visiting.",
+                    "Travel photography and consent: is it okay to photograph strangers?",
+                    "Travel privilege: who can travel easily and who cannot."
+                ]
+            },
+            {
+                name: "Katseye",
+                icon: "👁️",
+                issues: [
+                    "Pressure on idol groups to maintain a certain image and mental health impacts.",
+                    "Fan culture, parasocial relationships, and boundaries between fans and artists.",
+                    "Body image and beauty standards promoted by idol groups.",
+                    "Training systems: long hours, contracts, and fairness to young trainees.",
+                    "Online hate, bullying, and protection of artists on social media."
+                ]
+            },
+            {
+                name: "Acting",
+                icon: "🎭",
+                issues: [
+                    "Representation and diversity in film, TV, and theatre.",
+                    "Typecasting and stereotypes about certain groups.",
+                    "Working conditions for actors, especially children and extras.",
+                    "Impact of fame and social media on actors' privacy and mental health.",
+                    "How stories in film can challenge injustice or reinforce harmful ideas."
+                ]
+            },
+            {
+                name: "Laufey",
+                icon: "🎵",
+                issues: [
+                    "Social media's role in making niche genres popular worldwide.",
+                    "Online harassment and the need for safer spaces for artists and fans.",
+                    "Music streaming economics: how much do smaller artists earn.",
+                    "Balancing authenticity with pressure to go viral.",
+                    "Using music to speak about mental health and relationships in healthy ways."
+                ]
+            },
+            {
+                name: "Shopping",
+                icon: "🛍️",
+                issues: [
+                    "Consumerism and the pressure to constantly buy new things.",
+                    "Fast fashion, waste, and environmental impact.",
+                    "Online shopping and the treatment of warehouse and delivery workers.",
+                    "Advertising to children and teens: how companies influence our choices.",
+                    "Buy local vs big corporations: impact on small businesses."
+                ]
+            },
+            {
+                name: "Apsara",
+                icon: "💃",
+                issues: [
+                    "Protection of traditional dance from commercialisation and tourist shows.",
+                    "Cultural appropriation: when other cultures use Apsara imagery without respect.",
+                    "Training and support for young dancers learning Apsara today.",
+                    "Using Apsara performances to educate visitors about Cambodian history.",
+                    "Role of Apsara in national identity and pride."
+                ]
+            },
+            {
+                name: "K-pop and issues in this genre",
+                icon: "🎤",
+                issues: [
+                    "Idol training systems: strict diets, long hours, and contracts.",
+                    "Colourism, beauty standards, and plastic surgery pressure.",
+                    "Fan wars, online bullying, and toxic fandom behaviour.",
+                    "Cultural appropriation in K-pop music and fashion.",
+                    "How K-pop companies manage artists' mental health and privacy."
+                ]
+            },
+            {
+                name: "Flowers and plants",
+                icon: "🌸",
+                issues: [
+                    "Urban green spaces and their effect on mental health and biodiversity.",
+                    "Use of pesticides and fertilisers and their impact on insects and water.",
+                    "Protecting native plant species from invasive plants.",
+                    "Community gardens and food security in cities.",
+                    "Deforestation and loss of plant habitats."
+                ]
+            },
+            {
+                name: "Cooking and baking",
+                icon: "🍰",
+                issues: [
+                    "Food waste at home and how to reduce it.",
+                    "Healthy eating vs ultra-processed foods and sugary snacks.",
+                    "Cooking as a way to keep family culture and stories alive.",
+                    "Food allergies and inclusion at school events and parties.",
+                    "Energy use in kitchens and more sustainable cooking choices."
+                ]
+            },
+            {
+                name: "Fashion",
+                icon: "👗",
+                issues: [
+                    "Fast fashion, textile waste, and climate change.",
+                    "Working conditions for garment workers around the world.",
+                    "Body image, social media, and unrealistic beauty standards.",
+                    "Cultural appropriation vs appreciation in clothing styles.",
+                    "Second-hand, upcycling, and more sustainable fashion choices."
+                ]
+            },
+            {
+                name: "The internet",
+                icon: "🌐",
+                issues: [
+                    "Online privacy, data tracking, and who controls our information.",
+                    "Cyberbullying and its impact on mental health.",
+                    "Misinformation and fake news: how it spreads and how to spot it.",
+                    "Digital addiction and attention span.",
+                    "Online communities that support positive change (activism, learning)."
+                ]
+            },
+            {
+                name: "Fashion brands",
+                icon: "👔",
+                issues: [
+                    "Brand reputation vs reality: greenwashing and false sustainability claims.",
+                    "Transparency about factories and worker conditions.",
+                    "Celebrity and influencer marketing aimed at teenagers.",
+                    "Luxury brands and social inequality.",
+                    "How boycotts or calling out brands can create change."
+                ]
+            },
+            {
+                name: "Designing stuff",
+                icon: "✏️",
+                issues: [
+                    "Designing products that are accessible for people with disabilities.",
+                    "Eco-friendly design: using sustainable materials and reducing waste.",
+                    "Dark patterns in app and website design that trick users.",
+                    "Inclusive design that respects different cultures and languages.",
+                    "Designing for repair instead of throwaway products."
+                ]
+            },
+            {
+                name: "Animals native to Cambodia",
+                icon: "🐘",
+                issues: [
+                    "Habitat loss from deforestation and development.",
+                    "Illegal wildlife trade and poaching.",
+                    "Human-animal conflict near farms and villages.",
+                    "Protected areas and how effective they are.",
+                    "Education programs that teach about native wildlife conservation."
+                ]
+            },
+            {
+                name: "Novels",
+                icon: "📚",
+                issues: [
+                    "How stories shape our views on justice, gender, or inequality.",
+                    "Representation of different cultures and languages in popular books.",
+                    "Banned books and censorship: who decides what young people can read.",
+                    "Impact of e-books and audiobooks on access to reading.",
+                    "Using novels to build empathy for people in difficult situations."
+                ]
+            },
+            {
+                name: "Cambodian cinema",
+                icon: "🎥",
+                issues: [
+                    "How films tell stories about Cambodia's history and trauma.",
+                    "Funding and support for local filmmakers vs foreign productions.",
+                    "Representation of rural vs urban life on screen.",
+                    "Film piracy and its impact on the local film industry.",
+                    "How cinema can challenge stereotypes about Cambodia."
+                ]
+            },
+            {
+                name: "Snowboarding",
+                icon: "🏂",
+                issues: [
+                    "Impact of climate change on snowfall and winter sports.",
+                    "Cost and access: who gets to participate in snow sports.",
+                    "Tourism in mountain regions and its environmental impact.",
+                    "Safety, injuries, and pressure to take risks for social media.",
+                    "Snowboard brands and how sustainably they make their gear."
+                ]
+            },
+            {
+                name: "Mosquitoes",
+                icon: "🦟",
+                issues: [
+                    "Mosquito-borne diseases and public health (dengue, malaria).",
+                    "How climate change affects where mosquitoes can live.",
+                    "Community programs to reduce standing water and breeding sites.",
+                    "Use of insecticides and possible effects on other species.",
+                    "New technologies (like releasing modified mosquitoes) and ethical questions."
+                ]
+            },
+            {
+                name: "Mythology",
+                icon: "🐉",
+                issues: [
+                    "How myths shape cultural values and ideas of right and wrong.",
+                    "Gender roles in myths and their influence on society today.",
+                    "Use of mythological symbols in modern advertising and media.",
+                    "Preserving traditional stories in a digital world.",
+                    "Comparing myths from different cultures and what they say about human fears."
+                ]
+            },
+            {
+                name: "Lemur trafficking",
+                icon: "🐒",
+                issues: [
+                    "Illegal pet trade and its impact on lemur populations.",
+                    "Deforestation in Madagascar and habitat loss for lemurs.",
+                    "Poverty, tourism, and why people capture or sell lemurs.",
+                    "Conservation projects and how effective they are.",
+                    "Education campaigns to reduce demand for wild animals as pets."
+                ]
+            }
+        ];
+
+        const passionsGrid = document.getElementById('passionsGrid');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalList = document.getElementById('modalList');
+        const closeBtn = document.getElementById('closeBtn');
+        const searchInput = document.getElementById('searchInput');
+        const backToTop = document.getElementById('backToTop');
+
+        function renderPassions(filteredPassions) {
+            passionsGrid.innerHTML = '';
+            filteredPassions.forEach(passion => {
+                const card = document.createElement('div');
+                card.className = 'passion-card';
+                card.innerHTML = `
+                    <div class="icon">${passion.icon}</div>
+                    <h3>${passion.name}</h3>
+                    <small>Click to see possible inquiry issues</small>
+                `;
+                card.addEventListener('click', () => showModal(passion));
+                passionsGrid.appendChild(card);
+            });
+        }
+
+        function showModal(passion) {
+            modalTitle.textContent = `${passion.icon} ${passion.name}`;
+            modalList.innerHTML = '';
+            passion.issues.forEach(issue => {
+                const li = document.createElement('li');
+                li.textContent = issue;
+                modalList.appendChild(li);
+            });
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = passions.filter(passion =>
+                passion.name.toLowerCase().includes(searchTerm)
+            );
+            renderPassions(filtered);
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        renderPassions(passions);
+    </script>
+</body>
+</html>
