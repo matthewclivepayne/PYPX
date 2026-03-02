@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic Vocabulary Explorer</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; }
+        .topic { margin-bottom: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; cursor: pointer; background: #f9f9f9; }
+        .topic:hover { background: #e9e9e9; }
+        .topic-title { font-weight: bold; font-size: 1.2em; margin: 0 0 10px 0; }
+        .vocab-list { display: none; list-style: none; padding: 0; }
+        .vocab-list.show { display: block; }
+        .vocab-item { background: white; margin: 10px 0; padding: 10px; border-left: 4px solid #007bff; border-radius: 4px; }
+        .word { font-weight: bold; font-size: 1.1em; }
+        .def { margin: 5px 0 0 0; color: #333; }
+    </style>
+</head>
+<body>
+    <h1>Topic Vocabulary Explorer</h1>
+    <p>Click on a topic to reveal 6-8 key vocabulary words with definitions. Perfect for Grade 5-6 learning!</p>
+
+    <div class="topic">
+        <div class="topic-title">Age and birth order influence how siblings are treated and the expectations placed on them.</div>
+        <ul class="vocab-list" id="list1">
+            <li class="vocab-item"><span class="word">Birth order</span><div class="def">The order in which siblings are born in a family, affecting personality and roles [web:11].</div></li>
+            <li class="vocab-item"><span class="word">Firstborn</span><div class="def">The oldest child in the family, often given more responsibility [web:11].</div></li>
+            <li class="vocab-item"><span class="word">Middle child</span><div class="def">A sibling born between older and younger ones, sometimes feeling overlooked [web:11].</div></li>
+            <li class="vocab-item"><span class="word">Youngest</span><div class="def">The last-born child, often seen as more spoiled or creative [web:11].</div></li>
+            <li class="vocab-item"><span class="word">Sibling</span><div class="def">A brother or sister [web:10].</div></li>
+            <li class="vocab-item"><span class="word">Expectations</span><div class="def">What parents or society believe a child should achieve [web:9].</div></li>
+            <li class="vocab-item"><span class="word">Traits</span><div class="def">Personality characteristics influenced by family position [web:11].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Supporting K-pop idols in healthy ways can protect their wellbeing and mental health.</div>
+        <ul class="vocab-list" id="list2">
+            <li class="vocab-item"><span class="word">Wellbeing</span><div class="def">A state of being comfortable, healthy, or happy [web:20].</div></li>
+            <li class="vocab-item"><span class="word">Mental health</span><div class="def">Emotional and psychological well-being [web:12].</div></li>
+            <li class="vocab-item"><span class="word">Anxiety</span><div class="def">Feelings of worry, nervousness, or unease [web:20].</div></li>
+            <li class="vocab-item"><span class="word">Self-care</span><div class="def">Activities to maintain personal health and wellbeing [web:12].</div></li>
+            <li class="vocab-item"><span class="word">Depression</span><div class="def">A mood disorder causing persistent sadness [web:20].</div></li>
+            <li class="vocab-item"><span class="word">Idol</span><div class="def">A celebrity performer, like K-pop stars [web:12].</div></li>
+            <li class="vocab-item"><span class="word">Fandom</span><div class="def">A community of devoted fans [web:20].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Celebrating and preserving Cambodian cultural and food traditions helps keep an important part of our identity alive.</div>
+        <ul class="vocab-list" id="list3">
+            <li class="vocab-item"><span class="word">Preserving</span><div class="def">Protecting something from being lost or damaged [web:13].</div></li>
+            <li class="vocab-item"><span class="word">Traditions</span><div class="def">Customs passed down through generations [web:13].</div></li>
+            <li class="vocab-item"><span class="word">Identity</span><div class="def">The qualities that make a culture unique [web:13].</div></li>
+            <li class="vocab-item"><span class="word">Prahok</span><div class="def">Fermented fish paste, a key Cambodian ingredient [web:13].</div></li>
+            <li class="vocab-item"><span class="word">Amok</span><div class="def">Fish curry steamed in banana leaves [web:13].</div></li>
+            <li class="vocab-item"><span class="word">Num banh chok</span><div class="def">Khmer rice noodles [web:13].</div></li>
+            <li class="vocab-item"><span class="word">Heritage</span><div class="def">Valued cultural traditions from the past [web:21].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Learning how to stay safe around them can prevent rabies and protect people’s health.</div>
+        <ul class="vocab-list" id="list4">
+            <li class="vocab-item"><span class="word">Rabies</span><div class="def">A deadly virus spread by animal bites [web:14].</div></li>
+            <li class="vocab-item"><span class="word">Vaccinate</span><div class="def">Give medicine to prevent disease [web:14].</div></li>
+            <li class="vocab-item"><span class="word">Exposure</span><div class="def">Contact with something harmful like a virus [web:14].</div></li>
+            <li class="vocab-item"><span class="word">Stray</span><div class="def">Animals without owners wandering freely [web:14].</div></li>
+            <li class="vocab-item"><span class="word">Wound</span><div class="def">An injury like a bite or scratch [web:14].</div></li>
+            <li class="vocab-item"><span class="word">Prevent</span><div class="def">Stop something bad from happening [web:14].</div></li>
+            <li class="vocab-item"><span class="word">Ferret</span><div class="def">A small animal that needs vaccination against rabies [web:14].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Reducing pollution from mining in Southeast Asia can help keep rivers clean and protect ecosystems.</div>
+        <ul class="vocab-list" id="list5">
+            <li class="vocab-item"><span class="word">Pollution</span><div class="def">Harmful substances contaminating the environment [web:15].</div></li>
+            <li class="vocab-item"><span class="word">Ecosystems</span><div class="def">Communities of plants, animals, and their habitats [web:15].</div></li>
+            <li class="vocab-item"><span class="word">Mercury</span><div class="def">Toxic chemical used in gold mining [web:15].</div></li>
+            <li class="vocab-item"><span class="word">Cyanide</span><div class="def">Dangerous substance released in mining processes [web:15].</div></li>
+            <li class="vocab-item"><span class="word">Contamination</span><div class="def">Making water or soil dirty and unsafe [web:15].</div></li>
+            <li class="vocab-item"><span class="word">Mining</span><div class="def">Extracting minerals from the earth [web:15].</div></li>
+            <li class="vocab-item"><span class="word">Mekong</span><div class="def">Major river affected by mining pollution [web:15].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Protecting lemurs in Madagascar helps save an endangered species from extinction.</div>
+        <ul class="vocab-list" id="list6">
+            <li class="vocab-item"><span class="word">Endangered</span><div class="def">At risk of disappearing forever [web:16].</div></li>
+            <li class="vocab-item"><span class="word">Extinction</span><div class="def">When a species no longer exists [web:16].</div></li>
+            <li class="vocab-item"><span class="word">Lemurs</span><div class="def">Primates unique to Madagascar [web:16].</div></li>
+            <li class="vocab-item"><span class="word">Habitat</span><div class="def">Natural home and environment of a species [web:16].</div></li>
+            <li class="vocab-item"><span class="word">Critically endangered</span><div class="def">Facing extremely high risk of extinction [web:16].</div></li>
+            <li class="vocab-item"><span class="word">Conservation</span><div class="def">Actions to protect species and habitats [web:16].</div></li>
+            <li class="vocab-item"><span class="word">Sifaka</span><div class="def">A type of lemur now critically endangered [web:16].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Daily use of some chemical soaps can negatively affect the human body and health.</div>
+        <ul class="vocab-list" id="list7">
+            <li class="vocab-item"><span class="word">Toxic</span><div class="def">Poisonous or harmful to health [web:17].</div></li>
+            <li class="vocab-item"><span class="word">Irritation</span><div class="def">Redness or discomfort on skin [web:17].</div></li>
+            <li class="vocab-item"><span class="word">Endocrine</span><div class="def">Related to hormone systems in the body [web:17].</div></li>
+            <li class="vocab-item"><span class="word">Sodium lauryl sulfate (SLS)</span><div class="def">Foaming chemical that can irritate skin [web:17].</div></li>
+            <li class="vocab-item"><span class="word">Carcinogen</span><div class="def">Substance that can cause cancer [web:17].</div></li>
+            <li class="vocab-item"><span class="word">Fragrances</span><div class="def">Chemical scents that may trigger allergies [web:17].</div></li>
+            <li class="vocab-item"><span class="word">Disruption</span><div class="def">Interference with normal body functions [web:17].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Gender stereotypes and rules limit people’s choices and opportunities.</div>
+        <ul class="vocab-list" id="list8">
+            <li class="vocab-item"><span class="word">Stereotypes</span><div class="def">Fixed ideas about what people should be like [web:18].</div></li>
+            <li class="vocab-item"><span class="word">Gender roles</span><div class="def">Expected behaviors for males or females [web:18].</div></li>
+            <li class="vocab-item"><span class="word">Bias</span><div class="def">Unfair preference for one group [web:18].</div></li>
+            <li class="vocab-item"><span class="word">Discrimination</span><div class="def">Unfair treatment based on gender [web:18].</div></li>
+            <li class="vocab-item"><span class="word">Prejudice</span><div class="def">Negative opinions without reason [web:18].</div></li>
+            <li class="vocab-item"><span class="word">Misogyny</span><div class="def">Hatred of women [web:18].</div></li>
+            <li class="vocab-item"><span class="word">Equality</span><div class="def">Fair treatment for all genders [web:18].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Music with deep meaning can support people’s emotional wellbeing.</div>
+        <ul class="vocab-list" id="list9">
+            <li class="vocab-item"><span class="word">Emotional wellbeing</span><div class="def">Feeling good mentally and emotionally [web:29].</div></li>
+            <li class="vocab-item"><span class="word">Therapy</span><div class="def">Using music to improve mood [web:35].</div></li>
+            <li class="vocab-item"><span class="word">Anxiety</span><div class="def">Worry reduced by calming music [web:35].</div></li>
+            <li class="vocab-item"><span class="word">Catharsis</span><div class="def">Emotional release through music [web:29].</div></li>
+            <li class="vocab-item"><span class="word">Nostalgic</span><div class="def">Songs evoking past memories [web:29].</div></li>
+            <li class="vocab-item"><span class="word">Empowering</span><div class="def">Music that builds confidence [web:29].</div></li>
+            <li class="vocab-item"><span class="word">Resilience</span><div class="def">Ability to cope with stress via music [web:35].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Challenging unrealistic beauty standards on social media and promoting healthy messages can support teenagers’ body image and mental health.</div>
+        <ul class="vocab-list" id="list10">
+            <li class="vocab-item"><span class="word">Beauty standards</span><div class="def">Ideas of what is considered attractive [web:31].</div></li>
+            <li class="vocab-item"><span class="word">Body image</span><div class="def">How one perceives their own body [web:31].</div></li>
+            <li class="vocab-item"><span class="word">Body positivity</span><div class="def">Accepting all body types (#BoPo) [web:31].</div></li>
+            <li class="vocab-item"><span class="word">Unrealistic</span><div class="def">Not achievable in real life [web:31].</div></li>
+            <li class="vocab-item"><span class="word">Trends</span><div class="def">Quick-changing beauty fads on social media [web:31].</div></li>
+            <li class="vocab-item"><span class="word">Self-image</span><div class="def">Personal view of appearance [web:31].</div></li>
+            <li class="vocab-item"><span class="word">Influencers</span><div class="def">People promoting body-positive content [web:31].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Not all information online is bad, but it’s hard to know what to trust.</div>
+        <ul class="vocab-list" id="list11">
+            <li class="vocab-item"><span class="word">Misinformation</span><div class="def">False information spread unintentionally [web:30].</div></li>
+            <li class="vocab-item"><span class="word">Disinformation</span><div class="def">Deliberately false information [web:30].</div></li>
+            <li class="vocab-item"><span class="word">Sceptical</span><div class="def">Doubting until proven true [web:30].</div></li>
+            <li class="vocab-item"><span class="word">Trustworthy</span><div class="def">Reliable and accurate sources [web:30].</div></li>
+            <li class="vocab-item"><span class="word">Hoax</span><div class="def">A deceptive trick online [web:30].</div></li>
+            <li class="vocab-item"><span class="word">Bot</span><div class="def">Fake automated account spreading info [web:30].</div></li>
+            <li class="vocab-item"><span class="word">Fact</span><div class="def">Verifiable truth, unlike opinion [web:30].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Making the T20 Cricket World Cup seeding system fairer can give all teams a more equal chance to reach the Super 8 stage.</div>
+        <ul class="vocab-list" id="list12">
+            <li class="vocab-item"><span class="word">Seeding</span><div class="def">Ranking teams for fair grouping [web:27].</div></li>
+            <li class="vocab-item"><span class="word">Super 8s</span><div class="def">Advanced stage with 8 teams [web:27].</div></li>
+            <li class="vocab-item"><span class="word">Pre-seeding</span><div class="def">Predetermined group positions [web:27].</div></li>
+            <li class="vocab-item"><span class="word">Semi-finals</span><div class="def">Matches before the final [web:27].</div></li>
+            <li class="vocab-item"><span class="word">Net run rate</span><div class="def">Tiebreaker for team rankings.</div></li>
+            <li class="vocab-item"><span class="word">Group stage</span><div class="def">Initial round before Super 8s [web:27].</div></li>
+            <li class="vocab-item"><span class="word">Upset</span><div class="def">Unexpected win by lower-ranked team [web:27].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Apsara dance needs to be valued and supported so it is not forgotten as an important cultural tradition.</div>
+        <ul class="vocab-list" id="list13">
+            <li class="vocab-item"><span class="word">Apsara</span><div class="def">Celestial nymphs in Cambodian dance [web:22].</div></li>
+            <li class="vocab-item"><span class="word">Graceful</span><div class="def">Smooth and elegant movements [web:22].</div></li>
+            <li class="vocab-item"><span class="word">Sinuous</span><div class="def">Curving and fluid gestures [web:22].</div></li>
+            <li class="vocab-item"><span class="word">Mudra</span><div class="def">Symbolic hand positions [web:32].</div></li>
+            <li class="vocab-item"><span class="word">Repertoire</span><div class="def">Collection of dances performed [web:22].</div></li>
+            <li class="vocab-item"><span class="word">Myth</span><div class="def">Ancient stories told through dance [web:22].</div></li>
+            <li class="vocab-item"><span class="word">Heritage</span><div class="def">Cultural symbol of Cambodia [web:22].</div></li>
+        </ul>
+    </div>
+
+    <div class="topic">
+        <div class="topic-title">Protecting big cats from illegal hunting and trade helps them survive in the wild and keeps their populations safe for the future.</div>
+        <ul class="vocab-list" id="list14">
+            <li class="vocab-item"><span class="word">Poaching</span><div class="def">Illegal hunting of animals [web:28].</div></li>
+            <li class="vocab-item"><span class="word">Protected areas</span><div class="def">Safe zones like national parks [web:28].</div></li>
+            <li class="vocab-item"><span class="word">Habitat loss</span><div class="def">Destruction of living environments [web:28].</div></li>
+            <li class="vocab-item"><span class="word">Apex predators</span><div class="def">Top hunters regulating ecosystems [web:28].</div></li>
+            <li class="vocab-item"><span class="word">Biodiversity</span><div class="def">Variety of life in an area [web:28].</div></li>
+            <li class="vocab-item"><span class="word">Sanctuaries</span><div class="def">Places protecting wildlife [web:28].</div></li>
+            <li class="vocab-item"><span class="word">Conservation</span><div class="def">Efforts to save species [web:34].</div></li>
+        </ul>
+    </div>
+
+    <script>
+        document.querySelectorAll('.topic').forEach(topic => {
+            topic.addEventListener('click', () => {
+                const list = topic.querySelector('.vocab-list');
+                list.classList.toggle('show');
+            });
+        });
+    </script>
+</body>
+</html>
